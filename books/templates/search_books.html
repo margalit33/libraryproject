@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Search books</title>
+</head>
+<body>
+    <h1>Search books</h1>
+    <form method="get" action="{% url 'search_books' %}">
+        <input type="text" name="q" value="{{ query }}" placeholder="Search by book name">
+        <button type="submit">Search</button>
+    </form>
+    {% if query %}
+        <h2>Search results for "{{ query }}"</h2>
+        <ul>
+            {% for book in books %}
+                <li>{{ book.name }} by {{ book.author }}</li>
+            {% empty %}
+                <li>No books match the search query.</li>
+            {% endfor %}
+        </ul>
+    {% endif %}
+</body>
+</html>
