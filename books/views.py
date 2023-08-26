@@ -4,7 +4,7 @@ from books.models import Book, Customer , Loan
 from django.template import loader
 from .forms import BookForm
 from datetime import datetime, timedelta
-from django.contrib.auth import authenticate, login
+from django.contrib.auth import authenticate, login , logout
 
 
 
@@ -90,7 +90,7 @@ def books_login(request):
     if request.method == 'POST':
         username = request.POST.get('username')
         password = request.POST.get('password')
-        print(f"username={username}. passowrd={password}")
+        print(f"username={username}. password={password}")
 
 
         # Authenticate the user - validating user password. return user object if valid
@@ -110,6 +110,12 @@ def books_login(request):
             return render(request, 'index.html', {'error_message': error_message})
 
 
+    return redirect('index')
+
+
+def books_logout(request):
+    logout(request)
+    
     return redirect('index')
 
 

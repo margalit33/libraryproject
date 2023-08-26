@@ -4,11 +4,12 @@
 <a href="{% url 'books_logout' %}">logout</a>
 
 
+
 {% else %}
 <!-- show this if user is logged out-->
 <h3>please login</h3>
 <!-- login form -->
-<form method="POST" action="{% url 'books_login' %}">
+<form method="POST" action="{% url 'login' %}">
   {% csrf_token %} Username <input name="username" /> &nbsp; Password <input name="password" type="password" />
   <input type="submit" value="Login" />
 </form>
