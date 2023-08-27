@@ -4,7 +4,10 @@ from books.models import Book, Customer , Loan
 from django.template import loader
 from .forms import BookForm
 from datetime import datetime, timedelta
-from django.contrib.auth import authenticate, login , logout
+from django.contrib.auth import authenticate , login , logout
+from django.utils import timezone
+from django.contrib.auth.models import User
+from django.contrib.auth.decorators import login_required
 
 
 
@@ -102,7 +105,9 @@ def books_login(request):
             # If the credentials are correct, log in the user
             login(request, user)
             print(f"** login passed. user is:{user}")
-            return redirect('index')
+            return redirect ('booklist')
+
+            
         else:
             print(f"!! error login. user is:{user}")
             # If authentication fails, show an error message or redirect back to the login page
@@ -113,12 +118,45 @@ def books_login(request):
     return redirect('index')
 
 
+
 def books_logout(request):
     logout(request)
-    
     return redirect('index')
 
 
+
+@login_required 
+def booklist(request):
+    #bring booklist for this user from data base
+    print("booklist function entered !!!!!!!!!")
+    print(f"CURRENT USER IS : {request.user}")
+    return render(request,"booklist.html")
+
+
+
+
+
+
+def all_loans(request):
+    loans = Loan.objects.all()
+    return render(request, 'all_loans.html', {'loans': loans})
+
+
+
+
+
+def late_loans(request):
+    current_date = timezone.now().date()
+    late_loans = Loan.objects.filter(returndate__lt=current_date, returned=False)
+    return render(request, 'late_loans.html', {'late_loans': late_loans})
+
+
+
+def return_book(request, loan_id):
+    loan = get_object_or_404(Loan, id=loan_id)
+    loan.returned = True
+    loan.save()
+    return redirect('all_loans')  # Redirect to the page displaying all loans
 
 
 

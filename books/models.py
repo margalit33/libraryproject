@@ -40,11 +40,13 @@ class Loan(models.Model):
     book = models.ForeignKey(Book, on_delete=models.CASCADE)
     loandate = models.DateField()
     returndate = models.DateField()
-    returned = models.BooleanField(default=False)  
+    returned = models.BooleanField(default=False) 
+    
+     
 
 
     def __str__(self):
-        return f"{self.customer} - {self.book} - {self.loandate} - {self.returndate}"
+        return f"{self.customer} - {self.book} - {self.loandate} - {self.returndate} - {self.returned}"
 
 
     

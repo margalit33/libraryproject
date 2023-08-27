@@ -1,0 +1,10 @@
+<!-- Inside your loan details template -->
+<!-- ... -->
+<p>Loan Date: {{ loan.loandate }}</p>
+<p>Return Date: {{ loan.returndate }}</p>
+{% if not loan.returned %}
+    <a href="{% url 'return_book' loan.id %}">Return Book</a>
+{% else %}
+    Book Returned
+{% endif %}
+<!-- ... -->

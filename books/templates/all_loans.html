@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>All Loans</title>
+</head>
+<body>
+    <h1>All Loans</h1>
+    <table>
+        <thead>
+            <tr>
+                <th>Customer</th>
+                <th>Book</th>
+                <th>Loan Date</th>
+                <th>Return Date</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for loan in loans %}
+            <tr>
+                <td>{{ loan.customer }}</td>
+                <td>{{ loan.book }}</td>
+                <td>{{ loan.loan_date }}</td>
+                <td>{{ loan.return_date }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</body>
+</html>

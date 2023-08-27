@@ -5,7 +5,8 @@ urlpatterns = [
     path('',views.books),
     path('index/', views.index, name= "index"),
     path('login/', views.books_login, name="login"),
-    path("logout/", views.books_logout, name="logout"),
+    path("logout/", views.books_logout, name="books_logout"),
+    path("booklist/", views.booklist, name="booklist"),
 
 ]
 
